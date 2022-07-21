@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { removeTasks } from '../common/slices/prefSlice'
+import icon from '../../src/point.png'
 const Card = ({ name, taskId, columnId, index, tasks, setList }) => {
     const dispatch = useDispatch()
     const dragItem = useRef();
@@ -38,13 +39,21 @@ const Card = ({ name, taskId, columnId, index, tasks, setList }) => {
         // dragOverItem.current = null;
     };
     return (
-        <div className='card_wrapper' onDrop={()=>{drop(index)}} onDragEnter={(e) => dragEnter(e, index)} onDragStart={e => onDragStart(e, taskId ,index)} draggable onDragOver={(e) => { console.log() }}>
+        <div className="card_main" onDrop={()=>{drop(index)}} onDragEnter={(e) => dragEnter(e, index)} onDragStart={e => onDragStart(e, taskId ,index)} draggable onDragOver={(e) => { console.log() }}>
+        <div className='card_wrapper' >
             <h1>{name}</h1>
+            
             <div className="icon_wrapper">
 
                 <AiFillEdit size={20} className='edit_icon' />
                 <AiOutlineClose onClick={() => { dispatch(removeTasks({ taskId })) }} size={20} className='close_icon' />
             </div>
+        </div>
+            <span className='issue_type'>WEB - LIVE ISSUE</span>
+            <div className='task_id'>
+                <img src={icon} />
+                <p>SPOTS - 1037</p>
+        </div>
         </div>
     )
 }
